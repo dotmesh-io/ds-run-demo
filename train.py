@@ -184,11 +184,11 @@ tf.saved_model.simple_save(
     inputs={'input_image': model.input},
     outputs={t.name:t for t in model.outputs})
 
-ds.label("model.directory", ds.output("model"))
+ds.label("model.directory", ds.output("../model"))
 ds.label("model.framework", "tensorflow")
 ds.label("model.framework.version", tf.__version__)
 
-for root, dirs, files in os.walk("model"):
+for root, dirs, files in os.walk("../model"):
    for name in files:
       ds.output(os.path.join(root, name))
 
