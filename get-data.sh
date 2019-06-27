@@ -7,5 +7,5 @@ else
     mkdir /tmp/traffic-signs-data
     curl -s -o /tmp/traffic-signs-data/traffic-signs-data.zip $DATAFILE
     (cd /tmp/traffic-signs-data && unzip traffic-signs-data.zip && rm -f traffic-signs-data.zip)
-    (mv /tmp/traffic-signs-data/* .)
+    (mv /tmp/traffic-signs-data/* ds-run-demo/)
 fi
