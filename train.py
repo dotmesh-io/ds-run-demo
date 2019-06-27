@@ -12,9 +12,9 @@ import tensorflow as tf
 ds.script()
 ds.start()
 
-train_file = "train.p"
-valid_file = "valid.p"
-test_file = "test.p"
+train_file = "data/train.p"
+valid_file = "data/valid.p"
+test_file = "data/test.p"
 
 train = pickle.load(open(ds.input(train_file),"rb"))
 valid = pickle.load(open(ds.input(valid_file),"rb"))
@@ -23,14 +23,14 @@ test = pickle.load(open(ds.input(test_file),"rb"))
 import csv
 # Mapping ClassID to traffic sign names
 signs = []
-with open('signnames.csv', 'r') as csvfile:
+with open('data/signnames.csv', 'r') as csvfile:
     signnames = csv.reader(csvfile, delimiter=',')
     next(signnames,None)
     for row in signnames:
         signs.append(row[1])
     csvfile.close()
     
-ds.input("signnames.csv")
+ds.input("data/signnames.csv")
 
 X_train, y_train = train['features'], train['labels']
 X_valid, y_valid = valid['features'], valid['labels']
@@ -170,7 +170,7 @@ ds.summary("accuracy",
 # The signature definition is defined by the input and output tensors,
 # and stored with the default serving key
 
-MODEL_DIR = "./model"
+MODEL_DIR = "../model"
 version = 1
 export_path = os.path.join(MODEL_DIR, str(version))
 print('export_path = {}\n'.format(export_path))
