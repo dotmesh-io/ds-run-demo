@@ -5,8 +5,8 @@ if [ -d "/tmp/traffic-signs-data" ]; then
 else
     echo "Downloading data from $DATAFILE"
     mkdir /tmp/traffic-signs-data
-    mkdir -p ~/data
+    mkdir -p ./data
     curl -s -o /tmp/traffic-signs-data/traffic-signs-data.zip $DATAFILE
     (cd /tmp/traffic-signs-data && unzip traffic-signs-data.zip && rm -f traffic-signs-data.zip)
-    (mv /tmp/traffic-signs-data/* ~/data/)
+    (mv /tmp/traffic-signs-data/* ./data)
 fi
