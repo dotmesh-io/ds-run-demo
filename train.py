@@ -23,7 +23,7 @@ test = pickle.load(open(ds.input(test_file),"rb"))
 import csv
 # Mapping ClassID to traffic sign names
 signs = []
-with open('data/signnames.csv', 'r') as csvfile:
+with open('ds-run-demo/signnames.csv', 'r') as csvfile:
     signnames = csv.reader(csvfile, delimiter=',')
     next(signnames,None)
     for row in signnames:
