@@ -1,2 +1,2 @@
 #!/bin/bash
-python train.sh
+python train.py
