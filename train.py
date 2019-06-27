@@ -30,7 +30,7 @@ with open('data/signnames.csv', 'r') as csvfile:
         signs.append(row[1])
     csvfile.close()
     
-ds.input("data/signnames.csv")
+ds.input("ds-run-demo/signnames.csv")
 
 X_train, y_train = train['features'], train['labels']
 X_valid, y_valid = valid['features'], valid['labels']
