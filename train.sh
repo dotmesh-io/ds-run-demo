@@ -1,2 +1,2 @@
 #!/bin/bash
-python train.py
+cd ds-run-demo && python train.py
