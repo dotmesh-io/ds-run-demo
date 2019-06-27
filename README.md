@@ -44,22 +44,44 @@ ID                                     NAME                RUNNING TASKS       S
 c6d6f46f-4a32-4a9d-b649-acc28b282bc3   worker-x            0                   online              CPU                  About an hour
 ```
 
-<!-- ## upload signnames.csv
+## Setting up GitHub authentication to clone repository
 
-Using the Dotscience web UI, drag and drop the signnames.csv file from the root of this repo into the project resources in Dotscience. -->
+Dotscience can use SSH based authentication which is compatible with all source control management solutions. For the sake of simplicity, we will use GitHub.
 
-## fetching data
+To generate a new private/public SSH key pair, use `ds secret generate --name [NAME]` command:
 
-```
-ds run --verbose --nvidia . $PROJECT quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 -- bash get-data.sh
-```
-
-## train model
-
-```
-ds run --verbose --nvidia . $PROJECT quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 -- python train.py
+```bash
+$ ds secret generate --name deployment-key
+Public key: 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC67QalGM8aAcynRNqtizyn8ZKDuVE7cue63DRPfdo+NdNArZvAhp0wS+yREpomh6XtDhTXhgZeuzJLbfBPPsHBmLx+kDR0TQh8Y5ISoEjIGQHOuUPwlsIrD2JwVI4AheCikKIVIJU4UIuvZgNErJo/3zeCkMVDgMVrGrCDQVh/Eanxm9VKid5YFY3no4j88Nf3KwCtK0fMo93xNDS35RvezjuKCmxg91hnleDBozKNpck19uPk5Ww957QmwQYNEWKVB3xoa/SKUSxSksJJizhuos1vrooG7EX8b3JoIKyD/i92pbSM6mMeF0FmBuRWEU4EMsgbyFtp4S44u6utxaNF
 ```
 
-## check dotscience
+Now, you can copy/paste this key into your Github repository settings under `https://github.com/<username or org name>/<repo name>/settings/keys`.
+
+Once it's added, Dotscience will be able to clone this repository. You can add multiple keys and remove them if they are not needed anymore. Keys can be attached to a specific project or for any project in the account (if you don't set project ID when creating a secret).
+
+## Fetching data
+
+Every `ds run` command will need a project name. If you forgot your project name, type `ds project ls`: 
+
+```bash
+$ ds project ls
+ID                                     NAME                DOTS                                   COLLABORATORS       AGE
+ac6d7708-6988-4b49-b922-f3be7bdeaaf7   circleci            8c35ec84-9382-4263-a7e4-2f98885540e6                       3 hours
+```
+
+```bash
+ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master bash ds-run-demo/get-data.sh
+```
+
+> Note that the actual command can be specified either with `-c` flags or just positional arguments `bash ds-run-demo/get-data.sh`. You will need to specify a repository name as Dotscience clones repository into a subdirectory named after the repository. Any changes to this repository directory will be overwritten during next checkout. 
+
+## Train model
+
+```bash
+ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
+```
+
+## Check Dotscience
 
 You should see provenance & metrics data in Dotscience!
