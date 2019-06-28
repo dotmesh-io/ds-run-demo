@@ -16,5 +16,5 @@ jobs:
             DOTSCIENCE_USERNAME: ${DOTSCIENCE_USERNAME}
             DOTSCIENCE_PASSWORD: ${DOTSCIENCE_PASSWORD}            
             # DOTSCIENCE_EXECUTOR_IMAGE:
-            DOTSCIENCE_URL: ${DOTSCIENCE_URL}
+            DOTSCIENCE_URL: "https://stage.dotscience.net"
           command: /bin/ds run --project-name run-demo --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
