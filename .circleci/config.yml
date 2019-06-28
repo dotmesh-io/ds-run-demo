@@ -13,8 +13,8 @@ jobs:
       - run:
           name: Train
           environment:
-            DOTSCIENCE_USERNAME: ${DOTSCIENCE_USERNAME}
-            DOTSCIENCE_PASSWORD: ${DOTSCIENCE_PASSWORD}            
+            # DOTSCIENCE_USERNAME: ${DOTSCIENCE_USERNAME}
+            # DOTSCIENCE_PASSWORD: ${DOTSCIENCE_PASSWORD}            
             # DOTSCIENCE_EXECUTOR_IMAGE:
             DOTSCIENCE_URL: "https://stage.dotscience.net"
           command: |
