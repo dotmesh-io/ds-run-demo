@@ -78,18 +78,26 @@ ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tenso
 
 ## Train model
 
-```bash
-ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master bash ds-run-demo/train.sh
-```
+Now, to test train on `master` branch:
 
 ```bash
 ds run --project-name run-demo --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
 ```
 
-```bash
-# ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
-```
+You can replace flag `--ref` value with a commit ID, other branch name or tag name to train on that specific point in time.
 
-## Check Dotscience
+## Check score
+
+To see model performance, use `ds runs ls [PROJECT NAME OR ID]` command:
+
+```bash
+ds runs ls run-demo
+LABELS                                                                                     PARAMETERS                  TYPE                SCORE               AGE
+model.framework=tensorflow, model.framework.version=1.13.0-rc0, model.directory=model      epochs=1, optimizer=adam    accuracy            0.9030879           24 hours
+model.framework=tensorflow, model.framework.version=1.13.0-rc0, model.directory=../model   epochs=10, optimizer=adam   accuracy            0.9332542           24 hours
+model.directory=../model, model.framework=tensorflow, model.framework.version=1.13.0-rc0   epochs=5, optimizer=adam    accuracy            0.9219319           5 hours
+model.directory=../model, model.framework=tensorflow, model.framework.version=1.13.0-rc0   epochs=5, optimizer=adam    accuracy            0.919715            37 minutes
+model.directory=../model, model.framework=tensorflow, model.framework.version=1.13.0-rc0   epochs=5, optimizer=adam    accuracy            0.9275534           20 minutes
+```
 
 You should see provenance & metrics data in Dotscience!
