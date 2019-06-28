@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: quay.io/dotmesh/ds:latest
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      # run task
+      - run:
+          name: Train
+          context: staging-ds
+          # environment:
+          #   DOTSCIENCE_USERNAME: rusenask
+          #   DOTSCIENCE_PASSWORD: 
+          #   DOTSCIENCE_EXECUTOR_IMAGE:
+          #   DOTSCIENCE_URL: https://stage.dotscience.net
+          command: ds run --project-name run-demo --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
