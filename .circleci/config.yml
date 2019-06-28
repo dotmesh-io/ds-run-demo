@@ -13,11 +13,12 @@ jobs:
       - run:
           name: Train
           environment:
-            # DOTSCIENCE_USERNAME: ${DOTSCIENCE_USERNAME}
-            # DOTSCIENCE_PASSWORD: ${DOTSCIENCE_PASSWORD}            
+            # DOTSCIENCE_USERNAME: [configured via dashboard https://circleci.com/docs/2.0/env-vars/]
+            # DOTSCIENCE_PASSWORD: [same as above]
             # DOTSCIENCE_EXECUTOR_IMAGE:
             DOTSCIENCE_URL: "https://stage.dotscience.net"
           command: |
             echo $DOTSCIENCE_USERNAME
             echo ${CIRCLE_BRANCH}
-            /bin/ds run --project-name run-demo --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
+            echo ${CIRCLE_SHA1}
+            /bin/ds run --project-name run-demo --nvidia --async --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref ${CIRCLE_SHA1} python ds-run-demo/train.py
