@@ -83,6 +83,10 @@ ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tenso
 ```
 
 ```bash
+ds run --project-name run-demo --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
+```
+
+```bash
 # ds run --project-name circleci --nvidia --image quay.io/dotmesh/dotscience-tensorflow-opencv:19.02-py3 --repo git@github.com:dotmesh-io/ds-run-demo.git --ref master python ds-run-demo/train.py
 ```
 
