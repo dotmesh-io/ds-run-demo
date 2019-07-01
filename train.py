@@ -158,7 +158,7 @@ model.compile(optimizer=ds.parameter("optimizer", 'adam'),
 es = tf.keras.callbacks.EarlyStopping(monitor='acc')
 
 model.fit(X_train_preprocessed, y_train,
-          epochs=ds.parameter("epochs", 50),
+          epochs=ds.parameter("epochs", 30),
           verbose=1,
           validation_data=(X_valid_preprocessed, y_valid),
           callbacks=[es])
