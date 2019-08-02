@@ -16,7 +16,7 @@ jobs:
             # DOTSCIENCE_USERNAME: [configured via dashboard https://circleci.com/docs/2.0/env-vars/]
             # DOTSCIENCE_PASSWORD: [same as above]
             # DOTSCIENCE_EXECUTOR_IMAGE:
-            DOTSCIENCE_URL: "https://stage.dotscience.net"
+            DOTSCIENCE_URL: "https://cloud.dotscience.com"
           command: |
             echo $DOTSCIENCE_USERNAME
             echo ${CIRCLE_BRANCH}
